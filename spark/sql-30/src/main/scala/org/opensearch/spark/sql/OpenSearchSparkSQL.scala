@@ -99,7 +99,7 @@ object OpenSearchSparkSQL {
         throw new OpenSearchHadoopIllegalArgumentException("Streaming Datasets should not be saved with 'saveToOpenSearch()'. Instead, use " +
           "the 'writeStream().format(\"opensearch\").save()' methods.")
       }
-      val sparkCtx = srdd.sqlContext.sparkContext
+      val sparkCtx = srdd.sparkSession.sparkContext
       val sparkCfg = new SparkSettingsManager().load(sparkCtx.getConf)
       val openSearchCfg = new PropertiesSettings().load(sparkCfg.save())
       openSearchCfg.merge(cfg.asJava)
